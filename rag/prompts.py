@@ -8,8 +8,6 @@ RAG_PROMPT = ChatPromptTemplate.from_messages([
      
      Contexto:
      {context}
-     """,
-     ("human", "{question}")
-
-    )
+     """),
+     ("human", "{question}")    
 ])
