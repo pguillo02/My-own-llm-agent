@@ -21,7 +21,7 @@ def format_docs(docs: list) -> str:
 
 def build_rag_chain():
     """ 
-    
+    Function that creates de chain.
     """
 
     retriever = get_retriever()
@@ -33,5 +33,33 @@ def build_rag_chain():
              | StrOutputParser()
     )
 
-    return chain
+    return 
+
+@traceable(
+    name = "rag-query",
+    tags = ["rag", "prototype"],
+    metadata = {"version":"1.0"}
+)
+def query_rag(question: str, chain = None) -> dict:
+    
+    if chain is None:
+        chain = build_rag_chain()
+
+    retriever = get_retriever()
+    source_docs = retriever.invoke(question)
+
+    answer = chain.invoke(question)
+
+    return {
+        "question": question,
+        "answer": answer,
+        "source_documents": [
+            {
+                "content": doc.page_content,
+                "source": doc.metadata.get("source", "")
+            }
+            for doc in source_docs
+        ]
+    }
+
     
