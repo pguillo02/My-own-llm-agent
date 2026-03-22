@@ -18,3 +18,20 @@ def format_docs(docs: list) -> str:
     """
 
     return "/n/n".join([f"[Fuente: {doc.metadata.get('source', 'desconocida')}]\n{doc.page_content}" for doc in docs])
+
+def build_rag_chain():
+    """ 
+    
+    """
+
+    retriever = get_retriever()
+    llm = ChatOllama(model = settings.llm_model)
+
+    chain = ({"context": retriever | format_docs, "question": RunnablePassthrough()}
+             | RAG_PROMPT
+             | llm 
+             | StrOutputParser()
+    )
+
+    return chain
+    
