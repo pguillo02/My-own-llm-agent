@@ -15,6 +15,9 @@ class Settings(BaseSettings):
     chunk_overlap: int = 200
     retriever_k: int = 4
 
+    embedding_model: str = "mxbai-embed-large"
+    llm_model: str = "llama3.2"
+
     class Config:
         env_file = ".env"
         env_file_encoding = "utf-8"
