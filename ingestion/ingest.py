@@ -1,4 +1,4 @@
-from langchain_community.document_loaders import DirectoryLoader, TextLoader, WebBaseLoader
+from langchain_community.document_loaders import DirectoryLoader, TextLoader, PyPDFLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_ollama import OllamaEmbeddings
 from langchain_chroma import Chroma
@@ -7,7 +7,7 @@ from config.settings import get_settings
 settings = get_settings()
 
 def ingest(docs_path: str = settings.raw_documents_dir):
-    loader = DirectoryLoader(docs_path, loader_cls=TextLoader)
+    loader = DirectoryLoader(docs_path, loader_cls = PyPDFLoader)
     docs = loader.load()
 
     splitter = RecursiveCharacterTextSplitter(chunk_size = settings.chunk_size,
