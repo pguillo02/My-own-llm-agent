@@ -24,5 +24,4 @@ def get_settings() -> Settings:
     return Settings()
 
 if __name__ == "__main__":
-    print(Settings())
-
+    print(get_settings())
