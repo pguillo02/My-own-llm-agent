@@ -4,7 +4,7 @@ from functools import lru_cache
 class Settings(BaseSettings):
 
     langchain_tracing_v2: bool = True
-    langchain_endpoint: str = "https://api.smith.langchain.com"
+    langchain_endpoint: str = "https://eu.api.smith.langchain.com"
     langchain_api_key: str
     langchain_project: str = "My-own-llm-agent"
 
