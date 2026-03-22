@@ -9,6 +9,7 @@ class Settings(BaseSettings):
     langchain_project: str = "My-own-llm-agent"
 
     chroma_persist_dir: str = './data/chroma'
+    raw_documents_dir: str = './data/docs'
     collection_name: str = "documents"
 
     chunk_size: int = 1000
