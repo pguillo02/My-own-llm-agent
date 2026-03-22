@@ -1,11 +1,13 @@
+from dotenv import load_dotenv
+load_dotenv() 
+
 from rag.chain import build_rag_chain, query_rag
 
 def main():
     chain = build_rag_chain()
 
     questions = [
-        "¿Qué es la observabilidad en LLMs?",
-        "¿Cuándo usar RAGAS para evaluar un RAG?",
+        "¿Qué experiencia profesional tiene Pablo Guilló?",
     ]
 
     for question in questions:
