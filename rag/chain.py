@@ -8,3 +8,13 @@ from rag.prompts import RAG_PROMPT
 
 settings = get_settings()
 
+def format_docs(docs: list) -> str:
+    """
+    Function that formats the retrieved documents by indicating its sources and concatenates them with two lines as a separator.
+
+    Input: a list of documents. 
+
+    Returns: the documents concatanated with its sources. 
+    """
+
+    return "/n/n".join([f"[Fuente: {doc.metadata.get('source', 'desconocida')}]\n{doc.page_content}" for doc in docs])
