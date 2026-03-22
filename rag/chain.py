@@ -33,7 +33,7 @@ def build_rag_chain():
              | StrOutputParser()
     )
 
-    return 
+    return chain
 
 @traceable(
     name = "rag-query",
