@@ -40,6 +40,7 @@ def build_rag_chain():
     tags = ["rag", "prototype"],
     metadata = {"version":"1.0"}
 )
+
 def query_rag(question: str, chain = None) -> dict:
     
     if chain is None:
