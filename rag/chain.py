@@ -61,5 +61,4 @@ def query_rag(question: str, chain = None) -> dict:
             for doc in source_docs
         ]
     }
-
     
