@@ -11,3 +11,9 @@ def get_vectorstore() -> Chroma:
         embedding_function = OllamaEmbeddings(model = settings.embedding_model),
         persist_directory = settings.chroma_persist_dir
     )
+
+def get_retriever() -> VectorStoreRetriever:
+    return get_vectorstore().as_retriever(
+        search_type = "similarity",
+        search_kwargs = {"k": settings.retriever_k}
+    )
