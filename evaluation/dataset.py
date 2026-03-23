@@ -16,4 +16,28 @@ class Example:
     ground_truth: str
     metadata: dict
 
-    
+class DatasetManager:
+    def __init__(self, json_path: str = '.data/datasets/golden_set.json'):
+        self.json_path = Path(json_path)
+        self.client = Client()
+        self._examples = list[Example] = []
+
+    def load(self) -> list[Example]:
+        """
+        
+        """
+
+        with open(self.json_path, 'r', encoding = 'utf-8') as f:
+            data = json.load(f)
+
+        self._examples = [
+            Example(
+                id = ex["id"],
+                type = ex["type"],
+                question = ex["question"],
+                ground_truth = ex["ground_truth"],
+                metadata = ex["metadata", {}]
+            ) 
+            for ex in data["examples"]
+        ]
+        
