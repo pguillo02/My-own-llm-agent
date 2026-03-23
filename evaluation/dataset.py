@@ -40,4 +40,10 @@ class DatasetManager:
             ) 
             for ex in data["examples"]
         ]
-        
+
+        print(f"Loaded {len(self._examples)} example questions")
+        print(f"  - Factual:   {sum(1 for e in self._examples if e.type == 'factual')}")
+        print(f"  - Partial:   {sum(1 for e in self._examples if e.type == 'partial')}")
+        print(f"  - No answer: {sum(1 for e in self._examples if e.type == 'no_answer')}")
+
+        return self._examples
