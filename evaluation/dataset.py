@@ -47,3 +47,42 @@ class DatasetManager:
         print(f"  - No answer: {sum(1 for e in self._examples if e.type == 'no_answer')}")
 
         return self._examples
+
+    def push_to_langsmith(self, dataset_name: Optional[str] = None) -> str:
+        """
+        
+        """
+
+        if not self._examples:
+            self.load()
+
+        name = dataset_name or self.json_path.stem
+
+        existing = [d for d in self.client.list_datasets() if d.name == name]
+
+        if existing:
+            dataset = existing[0]
+
+            print(f"Dataset '{name}' already registered on LangSmith, updating...")
+
+        else:
+            dataset = self.client.create_dataset(
+                dataset_name = name,
+                description = f"Golden set - {len(self._examples)} examples"
+            )
+
+            print(f"Dataset '{name}' created on LangSmith")
+
+        self.client.create_examples(
+            inputs = [{"question": e.question} for e in self._examples],
+            outputs = [{"ground_truth": e.ground_truth} for e in self._examples],
+            metadata = [e.metadata for e in self._examples],
+            dataset_id = dataset.id
+        )
+
+        print(f"{len(self._examples)} uploaded to LangSmith")
+        return dataset.id
+
+        
+
+
