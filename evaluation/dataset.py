@@ -20,7 +20,7 @@ class DatasetManager:
     def __init__(self, json_path: str = '.data/datasets/golden_set.json'):
         self.json_path = Path(json_path)
         self.client = Client()
-        self._examples = list[Example] = []
+        self._examples: list[Example] = []
 
     def load(self) -> list[Example]:
         """
