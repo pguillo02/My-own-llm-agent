@@ -17,7 +17,7 @@ class Example:
     metadata: dict
 
 class DatasetManager:
-    def __init__(self, json_path: str = '.data/datasets/golden_set.json'):
+    def __init__(self, json_path: str = 'data\datasets\golden_set.json'):
         self.json_path = Path(json_path)
         self.client = Client()
         self._examples: list[Example] = []
@@ -36,7 +36,7 @@ class DatasetManager:
                 type = ex["type"],
                 question = ex["question"],
                 ground_truth = ex["ground_truth"],
-                metadata = ex["metadata", {}]
+                metadata = ex.get("metadata", {})
             ) 
             for ex in data["examples"]
         ]
