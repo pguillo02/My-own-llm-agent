@@ -82,7 +82,31 @@ class DatasetManager:
 
         print(f"{len(self._examples)} uploaded to LangSmith")
         return dataset.id
-
+    
+    def as_ragas_dataset(self, rag_chain) -> Dataset:
+        """
         
+        """
+        from rag.chain import query_rag
 
+        if not self._examples:
+            self.load()
 
+        questions, answers, contexts, ground_truths = [], [], [], []
+
+        for example in self._examples:
+            print(f"Processing: {example.question[:50]}...")
+            result = query_rag(example.question, chain = rag_chain)
+
+            questions.append(example.question)
+            answers.append(result["answer"])
+            contexts.append([d["content"] for d in result["source_documents"]])
+            ground_truths.append(example.ground_truth)
+
+        return Dataset.from_dict({
+            "questions": questions,
+            "answer": answers,
+            "contexts": contexts,
+            "ground_truth": ground_truths
+        })
+        
