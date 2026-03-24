@@ -41,7 +41,7 @@ class DatasetManager:
             for ex in data["examples"]
         ]
 
-        print(f"Loaded {len(self._examples)} example questions")
+        print(f"Loaded {len(self._examples)} example questions into the dataset manager object")
         print(f"  - Factual:   {sum(1 for e in self._examples if e.type == 'factual')}")
         print(f"  - Partial:   {sum(1 for e in self._examples if e.type == 'partial')}")
         print(f"  - No answer: {sum(1 for e in self._examples if e.type == 'no_answer')}")
@@ -80,7 +80,7 @@ class DatasetManager:
             dataset_id = dataset.id
         )
 
-        print(f"{len(self._examples)} uploaded to LangSmith")
+        print(f"{len(self._examples)} questions uploaded to LangSmith")
         return dataset.id
     
     def as_ragas_dataset(self, rag_chain) -> Dataset:
