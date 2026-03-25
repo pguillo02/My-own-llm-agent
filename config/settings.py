@@ -1,5 +1,11 @@
 from pydantic_settings import BaseSettings
 from functools import lru_cache
+from ragas.metrics import (
+    faithfulness, 
+    answer_relevancy,
+    context_precision,
+    answer_correctness
+)
 
 class Settings(BaseSettings):
 
@@ -18,6 +24,14 @@ class Settings(BaseSettings):
 
     embedding_model: str = "mxbai-embed-large"
     llm_model: str = "llama3.2"
+    #Should add ragas model as a setting configuration
+
+    metrics = [
+            faithfulness,
+            answer_relevancy,
+            context_precision,
+            answer_correctness
+        ]
 
     class Config:
         env_file = ".env"
