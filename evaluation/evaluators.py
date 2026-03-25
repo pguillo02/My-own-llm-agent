@@ -14,3 +14,17 @@ from config.settings import get_settings
 
 settings = get_settings()
 
+def get_ragas_config():
+    """
+    
+    """
+
+    llm = LangchainLLMWrapper(
+        ChatOllama(model = settings.llm_model, temperature = 0)
+    )
+
+    embeddings = LangchainEmbeddingsWrapper(
+        OllamaEmbeddings(model = settings.embedding_model)
+    )
+
+    return llm, embeddings
