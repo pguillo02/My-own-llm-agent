@@ -4,6 +4,7 @@ from ragas.embeddings import LangchainEmbeddingsWrapper
 from langchain_ollama import ChatOllama, OllamaEmbeddings
 from langsmith import Client 
 from config.settings import get_settings
+from langchain_ollama import ChatOllama, OllamaEmbeddings
 
 settings = get_settings()
 
@@ -12,8 +13,8 @@ class RagasEvaluator():
     def __init__(self, ragas_dataset, experiment_name):
         self.ragas_dataset = ragas_dataset
         self.experiment_name = experiment_name
-        self.ragas_llm = settings.llm_model
-        self.ragas_embedded = settings.embedding_model
+        self.ragas_llm = ChatOllama(model = settings.llm_model, temperature = 0)
+        self.ragas_embedded = OllamaEmbeddings(model = settings.embedding_model)
         self.metrics = settings.metrics
 
     def run_evaluation(self) -> dict:
